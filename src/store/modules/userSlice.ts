@@ -1,13 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { User } from '../../models/user.model';
+import { LoginProps } from '../../models/login.model';
+import { ApiService } from '../../services/api.service';
 
-const userSlice = createSlice({
+export const loginAction = createAsyncThunk('user/login', async (props: LoginProps) => {
+  const result = await ApiService.login(props);
+  console.log(result);
+
+  return result;
+});
+
+export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    id: 'b150b535-66ec-4fb5-8598-89d8fe762bb7',
-    name: 'maria'
-  } as User,
-  reducers: {}
+  initialState: {} as User,
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(loginAction.fulfilled, (_, action) => {
+      console.log(action.payload.data);
+      return action.payload.data;
+    });
+  }
 });
 
 export default userSlice.reducer;
