@@ -28,7 +28,6 @@ const ErrandHome: React.FC = () => {
       }
       setErro(result.payload.message);
     }
-    console.log(result.payload);
   };
 
   useEffect(() => {
