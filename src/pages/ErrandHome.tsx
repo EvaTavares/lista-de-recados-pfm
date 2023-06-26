@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import ContainerChina from '../components/ContainerChina';
-
-import { Button, Grid, TextField } from '@mui/material';
+import china from '../image/china.jpg';
+import { Button, Container, Grid, TextField } from '@mui/material';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { ErrandsList } from '../components/ErrandList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,71 +42,59 @@ const ErrandHome: React.FC = () => {
   return (
     <React.Fragment>
       <ResponsiveAppBar />
-      <ContainerChina>
-        <Grid
-          xs={12}
-          container
-          spacing={1}
-          component="form"
-          sx={{
-            alignItems: 'center',
-            // marginTop: '1rem',
-            '& .MuiTextField-root': {
-              m: 1,
-              background: ' #fff',
-              borderRadius: '10px'
-            }
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <Grid item xs={12} sm={5}>
-            <TextField
-              fullWidth
-              type="text"
-              id="outlined-basic"
-              label="Título"
-              variant="outlined"
-              // value={title}
-              // onChange={e => setTitle(e.target.value)}
-            />
-          </Grid>
+      {/* <Container
+        maxWidth="xl"
+        style={{
+          backgroundImage: `url(${china})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          width: '100wh',
+          height: '100vh'
+        }}
+      > */}
+      <Grid
+        xs={12}
+        container
+        spacing={1}
+        component="form"
+        sx={{
+          marginTop: '20px',
+          marginBottom: '0'
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <Grid item xs={12} sm={5}>
+          <TextField fullWidth type="text" id="outlined-basic" label="Título" variant="filled" />
+        </Grid>
 
-          <Grid item xs={12} sm={5}>
-            <TextField
-              fullWidth
-              id="outlined-basic"
-              label="Descrição"
-              variant="outlined"
-              // value={description}
-              // onChange={e => setDescription(e.target.value)}
-            />
-          </Grid>
+        <Grid item xs={12} sm={5}>
+          <TextField fullWidth id="outlined-basic" label="Descrição" variant="filled" />
+        </Grid>
 
-          <Grid item xs={12} sm={2}>
-            <Button
-              fullWidth
-              style={{
-                marginLeft: '10px',
-                color: '#FFCA48',
-                height: '3rem',
-                fontWeight: 'bold',
-                fontSize: '1rem',
-                backgroundColor: '#5C6103'
-              }}
-              type="button"
-              variant="outlined"
-              // onClick={handleAdd}
-            >
-              Cadastrar
-            </Button>
-          </Grid>
+        <Grid item xs={12} sm={2}>
+          <Button
+            fullWidth
+            style={{
+              marginLeft: '10px',
+              color: '#FFCA48',
+              height: '3rem',
+              fontWeight: 'bold',
+              fontSize: '1rem',
+              backgroundColor: '#5C6103'
+            }}
+            type="button"
+            variant="outlined"
+          >
+            Cadastrar
+          </Button>
         </Grid>
         <Grid item xs={12}>
           <ErrandsList />
           {erro && <p style={{ color: ' red' }}>Erro: {erro}</p>}
         </Grid>
-      </ContainerChina>
+      </Grid>
+      {/* </Container> */}
     </React.Fragment>
   );
 };
