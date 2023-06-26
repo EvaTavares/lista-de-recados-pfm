@@ -6,8 +6,9 @@ import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { ErrandsList } from '../components/ErrandList';
 import { useDispatch, useSelector } from 'react-redux';
 import { listErrandsAction } from '../store/modules/errandsSlice';
-import { useNavigate } from 'react-router-dom';
+
 import { RootState } from '../store';
+import { useNavigate } from 'react-router-dom';
 
 const ErrandHome: React.FC = () => {
   const dispatch = useDispatch<any>();
@@ -17,10 +18,7 @@ const ErrandHome: React.FC = () => {
   const navigate = useNavigate();
 
   const listApi = async () => {
-    //colocar o ID aqui
-    const id = 'b150b535-66ec-4fb5-8598-89d8fe762bb7';
-
-    const result = await dispatch(listErrandsAction({ id }));
+    const result = await dispatch(listErrandsAction({ id: user.id }));
     //tratamento a nível de página no componente
     if (!result.payload.ok) {
       //abrir um modal aqui
