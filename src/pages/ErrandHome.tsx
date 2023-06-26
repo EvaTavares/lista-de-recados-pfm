@@ -1,33 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ContainerChina from '../components/ContainerChina';
-import ErrandTable from '../components/ErrandTable';
-import { Button, Divider, Grid, TextField, Typography } from '@mui/material';
+
+import { Button, Grid, TextField } from '@mui/material';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import { ErrandsList } from '../components/ErrandList';
+import { useDispatch, useSelector } from 'react-redux';
+import { listErrandsAction } from '../store/modules/errandsSlice';
+import { useNavigate } from 'react-router-dom';
+import { RootState } from '../store';
 
 const ErrandHome: React.FC = () => {
+  const dispatch = useDispatch<any>();
+  const user = useSelector((state: RootState) => state.user);
+  //pensar onde colocar esse erro
+  const [erro, setErro] = useState(undefined);
+  const navigate = useNavigate();
+
+  const listApi = async () => {
+    //colocar o ID aqui
+    const id = 'b150b535-66ec-4fb5-8598-89d8fe762bb7';
+
+    const result = await dispatch(listErrandsAction({ id }));
+    //tratamento a nível de página no componente
+    if (!result.payload.ok) {
+      //abrir um modal aqui
+      if (result.payload.message === 'User not found.') {
+        navigate('/');
+        return;
+      }
+      setErro(result.payload.message);
+    }
+    console.log(result.payload);
+  };
+
+  useEffect(() => {
+    const isUserLogged = !!user.id;
+    if (!isUserLogged) {
+      navigate('/');
+      return;
+    }
+
+    listApi();
+  }, []);
+
   return (
     <React.Fragment>
       <ResponsiveAppBar />
       <ContainerChina>
-        <Grid
-          item
-          xs={12}
-          style={{
-            padding: '20px'
-          }}
-        >
-          <Typography
-            variant="h3"
-            sx={{
-              color: '#5C6103',
-              textAlign: 'center'
-              // fontSize: { xs: "40px", md: "70px", lg: "80px" },
-            }}
-          >
-            Novo Recado
-          </Typography>
-        </Grid>
-        <Divider />
         <Grid
           xs={12}
           container
@@ -35,7 +54,7 @@ const ErrandHome: React.FC = () => {
           component="form"
           sx={{
             alignItems: 'center',
-            marginTop: '1rem',
+            // marginTop: '1rem',
             '& .MuiTextField-root': {
               m: 1,
               background: ' #fff',
@@ -86,7 +105,10 @@ const ErrandHome: React.FC = () => {
               Cadastrar
             </Button>
           </Grid>
-          <ErrandTable />
+        </Grid>
+        <Grid item xs={12}>
+          <ErrandsList />
+          {erro && <p style={{ color: ' red' }}>Erro: {erro}</p>}
         </Grid>
       </ContainerChina>
     </React.Fragment>

@@ -25,9 +25,19 @@ const Login: React.FC = () => {
               sx={{
                 color: '#FFCA48',
                 textAlign: 'center',
+                fontSize: { xs: '30px', md: '60px', lg: '70px' },
+                marginBottom: '10px'
+              }}
+            >
+              Lista de Recados
+            </Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                color: '#FFCA48',
+                textAlign: 'center',
                 fontSize: { xs: '40px', md: '70px', lg: '80px' },
-                marginBottom: '10px',
-                marginTop: '30px'
+                marginBottom: '10px'
               }}
             >
               Login
@@ -52,7 +62,7 @@ const Login: React.FC = () => {
             />
             <Button
               fullWidth
-              style={{
+              sx={{
                 marginTop: '20px',
                 color: '#5C6103',
                 backgroundColor: '#FFCA48',
