@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import china from '../image/china.jpg';
-import { Button, Container, Grid, TextField } from '@mui/material';
+import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { ErrandsList } from '../components/ErrandList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,6 +52,7 @@ const ErrandHome: React.FC = () => {
           height: '100vh'
         }}
       > */}
+      <Typography variant="h4">Benvindo(a), {user.name}</Typography>
       <Grid
         xs={12}
         container

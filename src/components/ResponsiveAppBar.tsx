@@ -11,14 +11,16 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Badge } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 const pages = ['Arquivados', 'Desarquivado'];
 
 function ResponsiveAppBar() {
+  const errands = useSelector((state: RootState) => state.errands);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -49,7 +51,7 @@ function ResponsiveAppBar() {
             }}
             fontSize="large"
           />
-          <Badge badgeContent="0" sx={{ color: '#FFCA48' }}>
+          <Badge badgeContent={errands.length} sx={{ color: '#FFCA48' }}>
             <Typography
               variant="h6"
               noWrap
